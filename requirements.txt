@@ -1,2 +1,4 @@
 opencv-python
-imagezmq
+numpy
+matplotlib
+flask
