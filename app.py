@@ -1,8 +1,15 @@
+from flask import Flask
 import cv2
-import imagezmq
-image_hub = imagezmq.ImageHub()
-while True:
-    rpi_name, image = image_hub.recv_image()
-    cv2.imshow(rpi_name, image)
-    cv2.waitKey(1)
-    image_hub.send_reply(b'OK')
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return "Hello World!"
+
+
+@app.route('/working/<name>')
+def hello_name(name):
+   cap = cv2.VideoCapture(name)
+   ret, frame = cap.read()
+   return 'Working %s!' % name
